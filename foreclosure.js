@@ -14,11 +14,12 @@ function loan () {
 		foreclosed: 'false',
 	};
 
-function missPayment () {
-	account.defaulted++;  
-	}
-	if (account.defaulted >= account.defaultsToForeclose) {
-		return account.foreclosed = 'true';
+	function missPayment () {
+		account.defaulted++;  
+	
+		if (account.defaulted >= account.defaultsToForeclose) {
+			account.foreclosed = 'true';
+		}
 	}
 
 	return {
@@ -43,7 +44,23 @@ function borrower (loan) {
 		monthlyIncome: 1350,
 		funds: 2800,
 		loan: 'loan',
-
+	};
+	return {
+		getFunds: function () {
+			return account.funds;	
+		},
+		makePayment: function () {
+			if (account.funds > loan.monthlyPayment){
+				account.funds -= loan.monthlyPayment;
+			loan.receivePayment(1700);
+			} else {
+				loan.receivePayment(2800);
+				account.funds = 0;
+			}
+		},
+		payDay: function () {
+			account.funds += account.monthlyIncome;
+		}
 	};
 }
 
