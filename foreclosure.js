@@ -3,9 +3,8 @@ var steve;
 var stevesLoan;
 var month = 0; 
 var monthsUntilEvicted; 
-
 function loan () {
-	var account={
+	var account = {
 		borrowed: 55000,
 		balance: 286000,
 		monthlyPayment: 1700,
@@ -13,15 +12,12 @@ function loan () {
 		defaultsToForeclose: 5,
 		foreclosed: 'false',
 	};
-
 	function missPayment () {
 		account.defaulted++;  
-	
 		if (account.defaulted >= account.defaultsToForeclose) {
 			account.foreclosed = 'true';
 		}
 	}
-
 	return {
 		getBalance: function () {
 			return account.balance;	
@@ -41,7 +37,7 @@ function loan () {
 	};
 }
 function borrower (loan) {
-	var account={
+	var account = {
 		monthlyIncome: 1350,
 		funds: 2800,
 		loan: loan,
@@ -51,8 +47,8 @@ function borrower (loan) {
 			return account.funds;	
 		},
 		makePayment: function () {
-			if (account.funds > loan.monthlyPayment){
-				account.funds -= loan.monthlyPayment;
+			if (account.funds > 1700){
+				account.funds -= 1700;
 			loan.receivePayment(1700);
 			} else {
 				loan.receivePayment(2800);
@@ -64,11 +60,8 @@ function borrower (loan) {
 		}
 	};
 }
-
 var stevesLoan = loan();
 var steve = borrower(stevesLoan);
-
-
 while (stevesLoan.isForeclosed() === false) {
 	steve.payDay();
 	steve.makePayment();
