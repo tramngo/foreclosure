@@ -47,9 +47,9 @@ function borrower (loan) {
 			return account.funds;	
 		},
 		makePayment: function () {
-			if (account.funds > 1700){
-				account.funds -= 1700;
-			loan.receivePayment(1700);
+			if (account.funds > loan.getMonthlyPayment){
+				account.funds -= loan.getMonthlyPayment;
+			loan.receivePayment(loan.getMonthlyPayment);
 			} else {
 				loan.receivePayment(2800);
 				account.funds = 0;
